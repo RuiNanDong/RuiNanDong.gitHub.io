@@ -1,0 +1,91 @@
+{
+    "name": "Talent Coder",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [
+        ""
+    ],
+    "homepage": "http://JSLite.io",
+    "author": "wakeuppig <1035465284@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/WakeUpMyPig/jw_blog.git"
+    },
+    "licenses": "MIT",
+    "idoc": {
+        "theme": "blog",
+        "md": [
+            {
+                "JAVASCRIPT": [
+                    "es6课程.md"
+                ]
+            },
+            {
+                "自动化工具": [
+                    "webpack基础.md",
+                    "webpack应用.md",
+                    "babel.md"
+                ]
+            },
+            {
+                "js基础": [
+                    "初识JS.md",
+                    "原型链.md",
+                    "原型深入.md",
+                    "JS常用方法.md",
+                    "预解析作用域闭包.md",
+                    "正则.md",
+                    "盒子模型.md",
+                    "js基础知识.md"
+                ]
+            },
+            {
+                "nodejs": [
+                    "模块.md",
+                    "buffer.md",
+                    "文件操作.md",
+                    "流.md",
+                    "events.md",
+                    "http.md",
+                    "文件上传.md",
+                    "express.md",
+                    "cookie.md",
+                    "session.md",
+                    "mongodb.md"
+                ]
+            },
+            {
+                "AngularJS": [
+                    "angular入门.md",
+                    "angular基础.md",
+                    "指令.md",
+                    "服务.md",
+                    "route.md"
+                ]
+            },
+            {
+                "Vue.js": [
+                    "Vue入门.md",
+                    "Vue方法篇.md",
+                    "Vue方法篇2.md",
+                    "todo.md",
+                    "vue-resource.md",
+                    "Vue组件.md",
+                    "Vue指令.md",
+                    "route.md"
+                ]
+            },
+            {
+                "Git": [
+                    "git入门.md"
+                ]
+            },
+            {
+                "JAVASCRIPT": [
+                    "es6课程.md"
+                ]
+            },
+            "首页.md"
+        ]
+    }
+}
