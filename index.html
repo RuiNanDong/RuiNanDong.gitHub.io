@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue方法篇2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/23/My-New-Post/" class="article-date">
-  <time datetime="2016-11-23T03:08:40.000Z" itemprop="datePublished">2016-11-23</time>
+    <a href="/2016/11/28/Vue方法篇2/" class="article-date">
+  <time datetime="2016-11-28T07:34:02.137Z" itemprop="datePublished">2016-11-28</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/23/My-New-Post/">My New Post</a>
+      <a class="article-title" href="/2016/11/28/Vue方法篇2/">Vue方法篇2</a>
     </h1>
   
 
@@ -83,11 +83,279 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-v-on中的修饰符"><a href="#1-v-on中的修饰符" class="headerlink" title="1. v-on中的修饰符"></a>1. v-on中的修饰符</h1><ul>
+<li><p>1.1 阻止冒泡</p>
+<p>  防止子级事件触发时，触发父级的事件</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div @click=&quot;parent&quot;&gt;
+        parent
+        &lt;div @click.stop=&quot;child&quot;&gt;child&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>  给子父级增加方法</p>
+<pre><code>var vm = new Vue({
+    el:&apos;#app&apos;,
+    methods:{
+        parent: function () {
+            console.log(&apos;parent&apos;);
+        },
+        child: function () {
+            console.log(&apos;child&apos;);
+        }
+    }
+});
+</code></pre></li>
+<li><p>1.2 自己身上触发</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div @clickt.self=&quot;parent&quot;&gt;
+        parent
+        &lt;div @click=&quot;child&quot;&gt;child&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></li>
+<li><p>1.3 阻止默认事件</p>
+<pre><code>&lt;a href=&quot;http://www.baidu.com&quot; @click.prevent&gt;goBD&lt;/a&gt;
+</code></pre></li>
+<li><p>1.4 按键修饰符</p>
+<p>  <input type="text" @keyup.13="dosome"></p>
+<pre><code>或
+</code></pre><p>  <input type="text" @keyup.enter="dosome"><br>  内置的修饰符</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">键位</th>
+<th style="text-align:center">修饰符含义</th>
+<th style="text-align:center">键位    修饰符含义</th>
+<th style="text-align:center">键位</th>
+<th style="text-align:center">修饰符含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">enter</td>
+<td style="text-align:center">按下回车键</td>
+<td style="text-align:center">up</td>
+<td style="text-align:center">按下上键</td>
+<td style="text-align:center">left</td>
+<td>按下左键</td>
+</tr>
+<tr>
+<td style="text-align:center">tab</td>
+<td style="text-align:center">按下tab键</td>
+<td style="text-align:center">down</td>
+<td style="text-align:center">按下下键</td>
+<td style="text-align:center">delete</td>
+<td>按下删除键</td>
+</tr>
+<tr>
+<td style="text-align:center">esc</td>
+<td style="text-align:center">按下ESC键</td>
+<td style="text-align:center">right</td>
+<td style="text-align:center">按下右键</td>
+<td style="text-align:center">space</td>
+<td>按下空格键</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>1.5 自定义修饰符</p>
+<pre><code>Vue.directive(&apos;on&apos;).keyCodes.A = 65;
+</code></pre><p>  增加指令，后期会在指令篇中详细讲解如何自定义指令</p>
+</li>
+</ul>
+<h1 id="2-绑定样式"><a href="#2-绑定样式" class="headerlink" title="2.绑定样式"></a>2.绑定样式</h1><p>很多时候我们需要的样式，要根据我们的数据进行绑定</p>
+<ul>
+<li><p>2.1 通过 {{}}方式绑定</p>
+<pre><code>&lt;div class=&quot;{{hello}}&quot;&gt;
+</code></pre><p>  直接取data上对象的属性</p>
+</li>
+<li><p>2.2 优雅的绑定方式</p>
+<pre><code>&lt;div :class=&quot;hello&quot;&gt;
+</code></pre><p>  直接取data上对象的属性</p>
+</li>
+<li><p>2.3 根据boolean类型增加样式</p>
+<pre><code>&lt;div v-bind:class=&quot;{class1:true,class2:false}&quot;&gt;
+</code></pre><p>  根据数据的boolean类型增加class样式</p>
+</li>
+<li><p>2.4 绑定数组</p>
+<pre><code>&lt;div v-bind:class=&quot;[class1,class2]&quot;&gt;增加class1,和class2两个样式&lt;/div&gt;
+</code></pre></li>
+<li><p>2.5 根据条件绑定样式</p>
+<pre><code>&lt;div v-bind:class=&quot;[class1,isTrue?&apos;class2&apos;:&apos;class3&apos;]&quot;&gt;三元表达式判断&lt;/div&gt;
+</code></pre></li>
+<li><p>2.6 数组和对象混用</p>
+<pre><code>&lt;div v-bind:class=&quot;[class1,{class2:isTrue}]&quot;&gt;比较常见的增加样式用法&lt;/div&gt;
+</code></pre><p>  和v-bind:class不要混用; class 和v-bind:class可以同时存在</p>
+</li>
+</ul>
+<h1 id="3-绑定行内样式"><a href="#3-绑定行内样式" class="headerlink" title="3 绑定行内样式"></a>3 绑定行内样式</h1><ul>
+<li><p>3.1 直接绑定</p>
+<pre><code>&lt;div v-bind:style=&quot;{color:&apos;red&apos;,background:&apos;yellow&apos;}&quot;&gt;行内&lt;/div&gt;
+</code></pre></li>
+<li><p>3.2 绑定对象</p>
+</li>
+<li><pre><code>&lt;div v-bind:style=&quot;className&quot;&gt;行内&lt;/div&gt;
+data:{
+    className:{color:&apos;red&apos;}
+}
+</code></pre></li>
+<li><p>3.3 数组方式绑定多组对象</p>
+<pre><code>&lt;div v-bind:style=&quot;[hello,world]&quot;&gt;2个样式&lt;/div&gt;
+data:{
+    hello:{color:&apos;red&apos;},
+    world:{fontSize:&apos;50px&apos;}
+}
+</code></pre><p>  当 v-bind:style 使用需要厂商前缀的 CSS 属性时，如 transform，Vue.js会自动侦测并添加相应的前缀。</p>
+</li>
+</ul>
+<h1 id="4-过滤器"><a href="#4-过滤器" class="headerlink" title="4.过滤器"></a>4.过滤器</h1><ul>
+<li>4.1 内置过滤器</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">过滤器名字</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">过滤器名字</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">capitalize</td>
+<td style="text-align:center">首字母大写</td>
+<td style="text-align:center">uppercase</td>
+<td style="text-align:center">转换成大写</td>
+</tr>
+<tr>
+<td style="text-align:center">lowercase</td>
+<td style="text-align:center">转换成小写</td>
+<td style="text-align:center">currency</td>
+<td style="text-align:center">货币过滤器</td>
+</tr>
+<tr>
+<td style="text-align:center">pluralize</td>
+<td style="text-align:center">根据数量</td>
+<td style="text-align:center">json</td>
+<td style="text-align:center">对象过滤器</td>
+</tr>
+<tr>
+<td style="text-align:center">debounce</td>
+<td style="text-align:center">延迟数据刷新</td>
+<td style="text-align:center">limitBy</td>
+<td style="text-align:center">限制</td>
+</tr>
+<tr>
+<td style="text-align:center">filterBy</td>
+<td style="text-align:center">过滤器属性</td>
+<td style="text-align:center">orderBy</td>
+<td style="text-align:center">排序过滤器</td>
+</tr>
+</tbody>
+</table>
+<p>4.1.1 capitalize</p>
+<pre><code>{{ 'hello' | capitalize }} //Hello
+</code></pre><p>4.1.2 uppercase</p>
+<pre><code>{{ 'hello' | uppercase }} //HELLO
+</code></pre><p>4.1.3 lowercase</p>
+<pre><code>{{ 'HELLO' | lowercase  }} //hello
+</code></pre><p>4.1.4 currency</p>
+<pre><code>{{123.43123 | currency '￡' 2}}
+</code></pre><p>传递多个参数的时候,用空格分开</p>
+<p>4.1.5 pluralize</p>
+<p>除了1所有的都是复数</p>
+<pre><code>{{1 | pluralize 'item'}}
+</code></pre><p>4.1.6 pluralize</p>
+<p>转换不同数字，最大为9不满足的均为最后一项</p>
+<pre><code>{{9 | pluralize 'item' 'item2' 'item3' 'item4' 'item5' 'item6' 'item7' 'item8' 'item9' 'item10' 'item11'}}
+</code></pre><p>4.1.7 debounce</p>
+<p>延迟事件执行时间</p>
+<pre><code>&lt;input @keyup=&quot;onKeyup | debounce 500&quot;&gt;
+</code></pre><p>4.1.8 limitBy</p>
+<p>显示几条，从哪条开始显示</p>
+<pre><code>&lt;button @click=&quot;count+=2&quot;&gt;下一页&lt;/button&gt;
+&lt;div v-for=&quot;a in arr | limitBy 2 count&quot;&gt;
+    {{a}}
+&lt;/div&gt;
+</code></pre><p>4.1.9 filterBy</p>
+<p>在所用数据中过滤</p>
+<pre><code>&lt;div v-for=&quot;item in items | filterBy &apos;hello&apos;&quot;&gt;
+</code></pre><p>在指定的数据中过滤，节约性能</p>
+<pre><code>&lt;div v-for=&quot;item in items | filterBy &apos;Tom&apos; in &apos;name&apos; &apos;phone&apos;&quot;&gt;
+</code></pre><p>4.1.10 orderBy</p>
+<pre><code>&lt;button @click=&quot;order = order * -1&quot;&gt;排序反&lt;/button&gt;
+&lt;div v-for=&quot;item in items | orderBy &apos;name&apos; -1&quot;&gt;
+</code></pre><h1 id="5-自定义过滤器"><a href="#5-自定义过滤器" class="headerlink" title="5.自定义过滤器"></a>5.自定义过滤器</h1><p>通过Vue.filter()方法注册过滤器</p>
+<pre><code>Vue.filter(&apos;capitalize&apos;, function (value,begin,end) {
+        return value.slice(0,begin)+value.slice(begin,end).toUpperCase()+value.slice(end);
+});
+</code></pre><p>将数据写回model,对写入的内容进行过滤，当失去焦点时候继续过滤</p>
+<pre><code>&lt;input type=&quot;text&quot; v-model=&quot;hello | write 2&quot;&gt;
+{{hello}}
+Vue.filter(&apos;write&apos;,{
+    read: function (value,key) {
+        return value[key]
+    },
+    write: function (val) {
+        return val+&apos;zfpx&apos;
+    }
+});
+</code></pre><h1 id="6-表单元素"><a href="#6-表单元素" class="headerlink" title="6.表单元素"></a>6.表单元素</h1><ul>
+<li>6.1 checkbox</li>
+</ul>
+<p>获取checkbox值为当前value值,并且数据要为数组类型</p>
+<pre><code>&lt;input checked type=&quot;checkbox&quot; value=&quot;点击&quot; v-model=&quot;name&quot; &gt;
+&lt;input type=&quot;checkbox&quot; value=&quot;点击1&quot; v-model=&quot;name&quot; &gt;
+&lt;input type=&quot;checkbox&quot; value=&quot;点击2&quot; v-model=&quot;name&quot; &gt;
+{{name}}
+var vm = new Vue({
+    el:&quot;#app&quot;,
+    data:{
+       name:[],
+    }
+})
+</code></pre><ul>
+<li><p>6.2 radio</p>
+<p>  <input type="radio" value="first" v-model="radio"><br>  <input type="radio" value="second" v-model="radio"></p>
+  
+</li>
+<li><p>6.3 select</p>
+</li>
+</ul>
+<p>单选时类型为字符串，多选时类型为数组</p>
+<pre><code>&lt;select v-model=&quot;selected&quot; multiple &gt;
+    &lt;option value=&quot;4&quot; selected&gt;A&lt;/option&gt;
+    &lt;option value=&quot;5&quot;&gt;b&lt;/option&gt;
+    &lt;option value=&quot;6&quot;&gt;c&lt;/option&gt;
+&lt;/select&gt;
+{{selected}}
+</code></pre><p>动态绑定数据</p>
+<pre><code>&lt;select v-model=&quot;name&quot;&gt;
+  &lt;!--绑定value 到 Vue 实例的一个动态属性--&gt;
+  &lt;option v-for=&quot;a in ary&quot; :value=&quot;a.value&quot;&gt;{{a.name}}&lt;/option&gt;
+&lt;/select&gt;
+</code></pre><ul>
+<li><p>6.4 表单元素参数特性</p>
+</li>
+<li><p>6.4.1 lazy</p>
+</li>
+</ul>
+<p>将input改变为change</p>
+<pre><code>&lt;input type=&quot;text&quot; v-model=&quot;data&quot; lazy&gt;
+{{data}}
+</code></pre><ul>
+<li>6.4.2 debounce #</li>
+</ul>
+<p>延时数据改变时间</p>
+<pre><code>&lt;input type=&quot;text&quot; v-model=&quot;data&quot; debounce=&quot;3000&quot;&gt;
+{{data}}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/23/My-New-Post/" data-id="civucq09y0000j0task7hei7u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/28/Vue方法篇2/" data-id="ciw1ree8k0000p4tatc5nka2o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -97,10 +365,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue方法篇1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/23/hello-world/" class="article-date">
-  <time datetime="2016-11-23T02:58:22.839Z" itemprop="datePublished">2016-11-23</time>
+    <a href="/2016/11/24/Vue方法篇1/" class="article-date">
+  <time datetime="2016-11-24T08:46:17.632Z" itemprop="datePublished">2016-11-24</time>
 </a>
     
   </div>
@@ -111,7 +379,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/23/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/11/24/Vue方法篇1/">Vue方法篇1</a>
     </h1>
   
 
@@ -119,20 +387,449 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="1-Vue中的闪烁问题"><a href="#1-Vue中的闪烁问题" class="headerlink" title="1.Vue中的闪烁问题"></a>1.Vue中的闪烁问题</h1><ul>
+<li><p>1.1 v-text绑定属性</p>
+<pre><code>&lt;div v-text=&quot;hello&quot;&gt;&lt;/div&gt;
+</code></pre></li>
+<li><p>1.2 v-cloak解决闪烁</p>
+<p>  设置需要防止闪烁的dom元素上，在数据绑定后移除v-cloak属性</p>
+<pre><code>&lt;div v-cloak&gt;{{hello}}&lt;/div&gt;
+</code></pre></li>
+</ul>
+<h1 id="2-v-if-v-show-v-else"><a href="#2-v-if-v-show-v-else" class="headerlink" title="2.v-if/v-show/v-else"></a>2.v-if/v-show/v-else</h1><ul>
+<li><p>2.1 v-if</p>
+<p>  v-if条件不成立移除dom元素,可以与v-else连用</p>
+<pre><code>&lt;div v-if=&quot;false&quot;&gt;hello&lt;/div&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre><p>  可以使用vue自带的template标签，解决多余标签问题</p>
+<pre><code>&lt;template v-if=&quot;false&quot;&gt;hello&lt;/template&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre></li>
+<li><p>2.2 v-show</p>
+<p>  v-show 是简单的切换元素的 CSS 属性 display,可以与v-else连用</p>
+<pre><code>&lt;div v-show=&quot;false&quot;&gt;hello&lt;/div&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre><p>  不能使用template语法</p>
+</li>
+<li><p>2.3 v-if/v-show区别</p>
+<p>  一般来说，v‐if 有更高的切换消耗而 v‐show 有更高的初始渲染消耗。因此，如果需要频繁切换 v‐show 较好，如果在运行时条件不大可能改变 v‐if 较好</p>
+<p>  v-if当条件成立的时候会将元素加上，不成立，就会移出dom，并且内部的指令不会执行<br>  v-show只是简单的隐藏和显示</p>
+</li>
+</ul>
+<h1 id="3-v-for循环"><a href="#3-v-for循环" class="headerlink" title="3.v-for循环"></a>3.v-for循环</h1><pre><code>基于源数据将元素或模版块重复
+</code></pre><ul>
+<li><p>3.1 遍历对象</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot;&gt;
+    {{$index}}:{{value}}{{key}}:{{$key}} &lt;br&gt;
+&lt;/template&gt;
+data:{
+    data:{
+        name:&apos;zfpx&apos;,
+        age:7,
+    }
+}
+</code></pre></li>
+<li><p>3.2 遍历数组</p>
+<p>  <template v-for="(key,value) in data"></template></p>
+<pre><code>{{key}}:{{value.name}}:{{value.type}} &lt;br&gt;
+</code></pre><p>  <br>  data:{</p>
+<pre><code>data:[
+    {name:&apos;zfpx&apos;,type:[&apos;backbone&apos;]},
+    {name:&apos;zfpx1&apos;,type:[&apos;jquery&apos;,&apos;react&apos;,&apos;angularjs&apos;]},
+    {name:&apos;zfpx2&apos;,type:[&apos;nodejs&apos;,&apos;angularjs&apos;,&apos;vuejs&apos;]},
+]
+</code></pre><p>  }</p>
+</li>
+<li><p>3.3 嵌套循环</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot;&gt;
+    &lt;template v-for=&quot;(childKey,t) in value.type&quot;&gt;
+        {{key}}{{childKey}}{{t}} &lt;br&gt;
+    &lt;/template&gt;
+&lt;/template&gt;
+</code></pre></li>
+<li><p>3.4 遍历数组中相同项</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot; track-by=&quot;$index&quot;&gt;
+    {{value}}
+&lt;/template&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        data:[
+            &apos;苹果&apos;,&apos;苹果&apos;,&apos;苹果&apos;,&apos;苹果&apos;
+        ]
+    }
+})
+</code></pre><p>  如果没有唯一的键供追踪 尽量使用track-by</p>
+</li>
+</ul>
+<h1 id="4-v-bind绑定动态数据"><a href="#4-v-bind绑定动态数据" class="headerlink" title="4.v-bind绑定动态数据"></a>4.v-bind绑定动态数据</h1><pre><code>&lt;img v-bind:src=&quot;src&quot; alt=&quot;&quot;&gt;
+&lt;a v-bind:href=&quot;href&quot;&gt;官网&lt;/a&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        src:&apos;http://vuejs.org/images/logo.png&apos;,
+        href:&apos;http://vuejs.org&apos;
+    }
+})
+</code></pre><blockquote>
+<p>我们可以使用:号的方式进行简写,不要使用进行设置链接</p>
+</blockquote>
+<h1 id="5-v-on绑定事件"><a href="#5-v-on绑定事件" class="headerlink" title="5.v-on绑定事件"></a>5.v-on绑定事件</h1><pre><code>&lt;div v-on:click=&quot;sayHello&quot;&gt;sayHello&lt;/div&gt;
+&lt;div v-on:click=&quot;sayWorld(&apos;我&apos;,$event)&quot;&gt;sayWorld&lt;/div&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        hello:&apos;hello&apos;,
+        world:&apos;world&apos;
+    },
+    methods:{
+        sayHello(e){
+            console.log(e);//无参数时会传递事件源
+            alert(this.hello);
+        },
+        sayWorld(who,e){
+            console.log(e);//有参数时需要手动传递
+            alert(who+&apos;的&apos;+this.world);
+        }
+    }
+});
+</code></pre><blockquote>
+<p>我们可以使用@符的方式进行简写</p>
+</blockquote>
+<h1 id="6-图书管理案例"><a href="#6-图书管理案例" class="headerlink" title="6.图书管理案例"></a>6.图书管理案例</h1><p><img src="http://i.imgur.com/8IwEiAH.png" alt=""></p>
+<blockquote>
+<p>示意图 html的结构</p>
+</blockquote>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;table class=&quot;table table-bordered&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;书的名字&lt;/td&gt;
+                &lt;td&gt;数的价格&lt;/td&gt;
+                &lt;td&gt;书的数量&lt;/td&gt;
+                &lt;td&gt;小计&lt;/td&gt;
+                &lt;td&gt;操作&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr v-for=&quot;book in books&quot;&gt;
+                &lt;td&gt;{{book.name}}&lt;/td&gt;
+                &lt;td&gt;{{book.price}}&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; v-model=&quot;book.count&quot;&gt;&lt;/td&gt;
+                &lt;td&gt;{{book.price*book.count}}&lt;/td&gt;
+                &lt;td&gt;&lt;button class=&quot;btn btn-danger&quot; @click=&quot;remove(book)&quot;&gt;删除&lt;/button&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan=&quot;5&quot;&gt;
+                    总价格 {{total}}
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookname&quot; class=&quot;control-label&quot;&gt;书名&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.name&quot; id=&quot;bookname&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookprice&quot; class=&quot;control-label&quot;&gt;价格&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.price&quot; id=&quot;bookprice&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookcount&quot; class=&quot;control-label&quot;&gt;数量&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.count&quot; id=&quot;bookcount&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;btn btn-primary&quot; @click=&quot;add&quot;&gt;添加&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre><blockquote>
+<p>js代码</p>
+</blockquote>
+<pre><code>var books = [
+    {name:&apos;nodeJs&apos;,price:30,count:1},
+    {name:&apos;angularJs&apos;,price:20,count:2},
+    {name:&apos;vueJs&apos;,price:40,count:2}
+];
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        books:books,
+        list:{name:&apos;&apos;,price:&apos;&apos;,count:&apos;&apos;
+        }
+    },
+    computed:{
+        total() {
+            var sum = 0;
+            this.books.forEach(function (a) {
+                sum+=a.price* a.count
+            });
+            return sum;
+        }
+    },
+    methods: {
+        add() {
+            this.books.push(this.list);
+            this.list = {name:&apos;&apos;,price:&apos;&apos;,count:&apos;&apos;
+            }
+        },
+        remove(book){
+            this.books.$remove(book);
+        }
+    }
+});
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/24/Vue方法篇1/" data-id="civw47k1h00008otaf6bhkooa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/23/Vue/" class="article-date">
+  <time datetime="2016-11-23T08:07:16.762Z" itemprop="datePublished">2016-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/23/Vue/">Vue入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Vue的安装"><a href="#1-Vue的安装" class="headerlink" title="1.Vue的安装"></a>1.Vue的安装</h1><ul>
+<li><p>使用cdn</p>
+<pre><code>http://cdn.jsdelivr.net/vue/1.0.26/vue.min.js
+</code></pre></li>
+<li><p>通过npm安装</p>
+</li>
+<li><pre><code>$ npm install vue
+</code></pre></li>
+<li><p>通过bower安装</p>
+<pre><code>$ bower install vue
+</code></pre><h1 id="2-初识Vue"><a href="#2-初识Vue" class="headerlink" title="2.初识Vue"></a>2.初识Vue</h1></li>
+<li><p>2.1 hello world</p>
+<pre><code>&lt;div class=&quot;app&quot;&gt;
+    {{message}}
+&lt;/div&gt;
+&lt;script src=&quot;vue.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    var vm = new Vue({
+        el:&apos;.app&apos;,
+        data:{
+            message:&apos;hello world&apos;
+        }
+    });
+&lt;/script&gt; 
+</code></pre></li>
+<li><p>2.2 双向数据绑定v-model</p>
+<pre><code>&lt;div class=&quot;app&quot;&gt;
+    {{message}}+&lt;input type=&quot;text&quot; v-model=&quot;message&quot;&gt;
+&lt;/div&gt;
+</code></pre></li>
+<li><p>2.3 绑定表达式</p>
+<ul>
+<li><p>2.3.1 {{}}把模型的数据取出显示到页面上，<code>支持三元表达式</code></p>
+<pre><code>{{message?message:'init data'}}
+</code></pre></li>
+<li><p>2.3.2 {{*}}首次绑定数据后，不随数据变化(绑定一次) </p>
+<pre><code>{{*message}}
+</code></pre></li>
+<li><p>2.3.3 {{}}把html类型的数据正常绑定到页面上</p>
+<pre><code>&lt;div class=&quot;app&quot;&gt;
+    {{{message}}}
+&lt;/div&gt;
+&lt;script&gt;
+    var vm = new Vue({
+        el:&apos;.app&apos;,
+        data:{
+            message:&apos;&lt;h1&gt;hello world&lt;/h1&gt;&apos;
+        }
+    });
+&lt;/script&gt;
+</code></pre></li>
+</ul>
+</li>
+<li><p>2.4 Vue的实例</p>
+<p>   一个 Vue 实例其实正是一个 MVVM 模式中所描述的 ViewModel，实例上的data属性绑定的数据和原数据指定的是同一内存空间</p>
+<pre><code>var message  = {
+    name:&apos;hello&apos;
+};
+var vm = new Vue({
+    el:&apos;.app&apos;,
+    data:{
+        message:message
+    }
+});
+alert(vm.message == message);
+</code></pre></li>
+</ul>
+<pre><code>&gt; 注意
+
+不能把原数据指向新的数据，否则不能刷新视图
+
+     var message  = {
+         name:&apos;hello&apos;
+     };
+     var vm = new Vue({
+         el:&apos;.app&apos;,
+         data:{
+             message:message
+         }
+     });
+
+     message = {name:&apos;hello1&apos;}
+&gt; 实例创建后不能设置以前没有的属性，无法映射到视图
+
+
+     var message  = {
+         name:&apos;hello&apos;
+     };
+     var vm = new Vue({
+         el:&apos;.app&apos;,
+         data:{
+             message:message 
+         }
+     });
+     message.age = 100;
+
+&gt; Vue.set/vm.$set可以给对象添加属性
+</code></pre><ul>
+<li><p>2.5 实例上的属性和方法</p>
+<p>  Vue通过$暴露实例上的属性和方法</p>
+<ul>
+<li><p>2.5.1 $el</p>
+<p>  获取当前绑定的元素</p>
+<pre><code>vm.$el = document.querySelector(&apos;.app&apos;);
+</code></pre><blockquote>
+<p>不能更改绑定对象</p>
+</blockquote>
+</li>
+<li><p>2.5.2 $data</p>
+<p>  获取当前绑定的数据</p>
+<pre><code>vm.$data = {message:{name:1}}
+</code></pre><blockquote>
+<p>更换data对象刷新视图，尽量不去更换</p>
+</blockquote>
+</li>
+<li><p>2.5.3 $watch</p>
+<p>  监控模型的变化</p>
+<pre><code>vm.$watch(&apos;message&apos;, function (newVal,oldVal) {
+    console.log(newVal,oldVal);
+});
+</code></pre><h1 id="3生命周期"><a href="#3生命周期" class="headerlink" title="3生命周期"></a>3生命周期</h1></li>
+<li><p>3.1 属性介绍</p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th style="text-align:right">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>created</td>
+<td style="text-align:right">先实例化,在实例化后(检测el)</td>
+</tr>
+<tr>
+<td>vm.$mount(‘#app’)</td>
+<td style="text-align:right">手动挂载实例</td>
+</tr>
+<tr>
+<td>beforeCompile</td>
+<td style="text-align:right">开始编译之前</td>
+</tr>
+<tr>
+<td>compiled</td>
+<td style="text-align:right">编译完成后</td>
+</tr>
+<tr>
+<td>ready</td>
+<td style="text-align:right">插入文档后</td>
+</tr>
+<tr>
+<td>vm.$destroy()</td>
+<td style="text-align:right">手动销毁实例</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td style="text-align:right">将要销毁</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td style="text-align:right">销毁实例</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>3.2 生命周期的使用</p>
+<pre><code>var vm = new Vue({
+    data:{
+        hello:&apos;zfpx&apos;
+    },
+    created: function () {alert(&apos;实例创建完成&apos;);},
+    beforeCompile: function () {alert(&apos;开始编译前&apos;)},
+    compiled: function () {alert(&apos;编译完成&apos;)},
+    ready: function () {alert(&apos;准备好了&apos;)},
+    beforeDestroy: function () {alert(&apos;准备销毁&apos;)},
+    destroyed: function () {alert(&quot;销毁&quot;)}
+});
+vm.$mount(&apos;#app&apos;);
+vm.$destroy();
+</code></pre></li>
+<li><p>3.3 属性的计算</p>
+<p>  用于计算性属性(默认为属性的get方法)</p>
+<pre><code>var vm = new Vue({
+    data:{
+        name:&apos;zfpx&apos;
+    },
+    computed: {
+        hello: function () {
+            return this.name+8;
+        }
+    }
+});
+vm.$mount(&apos;#app&apos;);
+</code></pre><p>  属性的获取和设置</p>
+<pre><code>var vm = new Vue({
+    data:{
+        name:&apos;zfpx&apos;
+    },
+    computed: {
+        hello:{
+            get: function () {
+                return this.name+8;
+            },
+            set: function (val) {
+                this.name = val
+            }
+        }
+    },
+});
+</code></pre></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/23/hello-world/" data-id="civucq09y0001j0taluwm1w21" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/23/Vue/" data-id="civw1tuj70000j4tay59bzjq8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,11 +869,15 @@
       <ul>
         
           <li>
-            <a href="/2016/11/23/My-New-Post/">My New Post</a>
+            <a href="/2016/11/28/Vue方法篇2/">Vue方法篇2</a>
           </li>
         
           <li>
-            <a href="/2016/11/23/hello-world/">Hello World</a>
+            <a href="/2016/11/24/Vue方法篇1/">Vue方法篇1</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/23/Vue/">Vue入门</a>
           </li>
         
       </ul>

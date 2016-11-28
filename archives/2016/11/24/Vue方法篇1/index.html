@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue方法篇1 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.Vue中的闪烁问题
+1.1 v-text绑定属性
+&amp;lt;div v-text=&amp;quot;hello&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+1.2 v-cloak解决闪烁
+  设置需要防止闪烁的dom元素上，在数据绑定后移除v-cloak属性
+&amp;lt;div v-cloak&amp;gt;{{hello}}&amp;lt;/div&amp;gt;
+
+
+2.v-if/v-show/v-else
+2.1 v-i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue方法篇1">
+<meta property="og:url" content="http://yoursite.com/2016/11/24/Vue方法篇1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.Vue中的闪烁问题
+1.1 v-text绑定属性
+&amp;lt;div v-text=&amp;quot;hello&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+1.2 v-cloak解决闪烁
+  设置需要防止闪烁的dom元素上，在数据绑定后移除v-cloak属性
+&amp;lt;div v-cloak&amp;gt;{{hello}}&amp;lt;/div&amp;gt;
+
+
+2.v-if/v-show/v-else
+2.1 v-i">
+<meta property="og:image" content="http://i.imgur.com/8IwEiAH.png">
+<meta property="og:updated_time" content="2016-11-24T08:47:58.428Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue方法篇1">
+<meta name="twitter:description" content="1.Vue中的闪烁问题
+1.1 v-text绑定属性
+&amp;lt;div v-text=&amp;quot;hello&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+1.2 v-cloak解决闪烁
+  设置需要防止闪烁的dom元素上，在数据绑定后移除v-cloak属性
+&amp;lt;div v-cloak&amp;gt;{{hello}}&amp;lt;/div&amp;gt;
+
+
+2.v-if/v-show/v-else
+2.1 v-i">
+<meta name="twitter:image" content="http://i.imgur.com/8IwEiAH.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue方法篇1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/24/Vue方法篇1/" class="article-date">
+  <time datetime="2016-11-24T08:46:17.632Z" itemprop="datePublished">2016-11-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue方法篇1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Vue中的闪烁问题"><a href="#1-Vue中的闪烁问题" class="headerlink" title="1.Vue中的闪烁问题"></a>1.Vue中的闪烁问题</h1><ul>
+<li><p>1.1 v-text绑定属性</p>
+<pre><code>&lt;div v-text=&quot;hello&quot;&gt;&lt;/div&gt;
+</code></pre></li>
+<li><p>1.2 v-cloak解决闪烁</p>
+<p>  设置需要防止闪烁的dom元素上，在数据绑定后移除v-cloak属性</p>
+<pre><code>&lt;div v-cloak&gt;{{hello}}&lt;/div&gt;
+</code></pre></li>
+</ul>
+<h1 id="2-v-if-v-show-v-else"><a href="#2-v-if-v-show-v-else" class="headerlink" title="2.v-if/v-show/v-else"></a>2.v-if/v-show/v-else</h1><ul>
+<li><p>2.1 v-if</p>
+<p>  v-if条件不成立移除dom元素,可以与v-else连用</p>
+<pre><code>&lt;div v-if=&quot;false&quot;&gt;hello&lt;/div&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre><p>  可以使用vue自带的template标签，解决多余标签问题</p>
+<pre><code>&lt;template v-if=&quot;false&quot;&gt;hello&lt;/template&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre></li>
+<li><p>2.2 v-show</p>
+<p>  v-show 是简单的切换元素的 CSS 属性 display,可以与v-else连用</p>
+<pre><code>&lt;div v-show=&quot;false&quot;&gt;hello&lt;/div&gt;
+&lt;div v-else&gt;world&lt;/div&gt;
+</code></pre><p>  不能使用template语法</p>
+</li>
+<li><p>2.3 v-if/v-show区别</p>
+<p>  一般来说，v‐if 有更高的切换消耗而 v‐show 有更高的初始渲染消耗。因此，如果需要频繁切换 v‐show 较好，如果在运行时条件不大可能改变 v‐if 较好</p>
+<p>  v-if当条件成立的时候会将元素加上，不成立，就会移出dom，并且内部的指令不会执行<br>  v-show只是简单的隐藏和显示</p>
+</li>
+</ul>
+<h1 id="3-v-for循环"><a href="#3-v-for循环" class="headerlink" title="3.v-for循环"></a>3.v-for循环</h1><pre><code>基于源数据将元素或模版块重复
+</code></pre><ul>
+<li><p>3.1 遍历对象</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot;&gt;
+    {{$index}}:{{value}}{{key}}:{{$key}} &lt;br&gt;
+&lt;/template&gt;
+data:{
+    data:{
+        name:&apos;zfpx&apos;,
+        age:7,
+    }
+}
+</code></pre></li>
+<li><p>3.2 遍历数组</p>
+<p>  <template v-for="(key,value) in data"></template></p>
+<pre><code>{{key}}:{{value.name}}:{{value.type}} &lt;br&gt;
+</code></pre><p>  <br>  data:{</p>
+<pre><code>data:[
+    {name:&apos;zfpx&apos;,type:[&apos;backbone&apos;]},
+    {name:&apos;zfpx1&apos;,type:[&apos;jquery&apos;,&apos;react&apos;,&apos;angularjs&apos;]},
+    {name:&apos;zfpx2&apos;,type:[&apos;nodejs&apos;,&apos;angularjs&apos;,&apos;vuejs&apos;]},
+]
+</code></pre><p>  }</p>
+</li>
+<li><p>3.3 嵌套循环</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot;&gt;
+    &lt;template v-for=&quot;(childKey,t) in value.type&quot;&gt;
+        {{key}}{{childKey}}{{t}} &lt;br&gt;
+    &lt;/template&gt;
+&lt;/template&gt;
+</code></pre></li>
+<li><p>3.4 遍历数组中相同项</p>
+<pre><code>&lt;template v-for=&quot;(key,value) in data&quot; track-by=&quot;$index&quot;&gt;
+    {{value}}
+&lt;/template&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        data:[
+            &apos;苹果&apos;,&apos;苹果&apos;,&apos;苹果&apos;,&apos;苹果&apos;
+        ]
+    }
+})
+</code></pre><p>  如果没有唯一的键供追踪 尽量使用track-by</p>
+</li>
+</ul>
+<h1 id="4-v-bind绑定动态数据"><a href="#4-v-bind绑定动态数据" class="headerlink" title="4.v-bind绑定动态数据"></a>4.v-bind绑定动态数据</h1><pre><code>&lt;img v-bind:src=&quot;src&quot; alt=&quot;&quot;&gt;
+&lt;a v-bind:href=&quot;href&quot;&gt;官网&lt;/a&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        src:&apos;http://vuejs.org/images/logo.png&apos;,
+        href:&apos;http://vuejs.org&apos;
+    }
+})
+</code></pre><blockquote>
+<p>我们可以使用:号的方式进行简写,不要使用进行设置链接</p>
+</blockquote>
+<h1 id="5-v-on绑定事件"><a href="#5-v-on绑定事件" class="headerlink" title="5.v-on绑定事件"></a>5.v-on绑定事件</h1><pre><code>&lt;div v-on:click=&quot;sayHello&quot;&gt;sayHello&lt;/div&gt;
+&lt;div v-on:click=&quot;sayWorld(&apos;我&apos;,$event)&quot;&gt;sayWorld&lt;/div&gt;
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        hello:&apos;hello&apos;,
+        world:&apos;world&apos;
+    },
+    methods:{
+        sayHello(e){
+            console.log(e);//无参数时会传递事件源
+            alert(this.hello);
+        },
+        sayWorld(who,e){
+            console.log(e);//有参数时需要手动传递
+            alert(who+&apos;的&apos;+this.world);
+        }
+    }
+});
+</code></pre><blockquote>
+<p>我们可以使用@符的方式进行简写</p>
+</blockquote>
+<h1 id="6-图书管理案例"><a href="#6-图书管理案例" class="headerlink" title="6.图书管理案例"></a>6.图书管理案例</h1><p><img src="http://i.imgur.com/8IwEiAH.png" alt=""></p>
+<blockquote>
+<p>示意图 html的结构</p>
+</blockquote>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;table class=&quot;table table-bordered&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;书的名字&lt;/td&gt;
+                &lt;td&gt;数的价格&lt;/td&gt;
+                &lt;td&gt;书的数量&lt;/td&gt;
+                &lt;td&gt;小计&lt;/td&gt;
+                &lt;td&gt;操作&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr v-for=&quot;book in books&quot;&gt;
+                &lt;td&gt;{{book.name}}&lt;/td&gt;
+                &lt;td&gt;{{book.price}}&lt;/td&gt;
+                &lt;td&gt;&lt;input type=&quot;text&quot; v-model=&quot;book.count&quot;&gt;&lt;/td&gt;
+                &lt;td&gt;{{book.price*book.count}}&lt;/td&gt;
+                &lt;td&gt;&lt;button class=&quot;btn btn-danger&quot; @click=&quot;remove(book)&quot;&gt;删除&lt;/button&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td colspan=&quot;5&quot;&gt;
+                    总价格 {{total}}
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookname&quot; class=&quot;control-label&quot;&gt;书名&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.name&quot; id=&quot;bookname&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookprice&quot; class=&quot;control-label&quot;&gt;价格&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.price&quot; id=&quot;bookprice&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bookcount&quot; class=&quot;control-label&quot;&gt;数量&lt;/label&gt;
+            &lt;input type=&quot;text&quot; v-model=&quot;list.count&quot; id=&quot;bookcount&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;btn btn-primary&quot; @click=&quot;add&quot;&gt;添加&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre><blockquote>
+<p>js代码</p>
+</blockquote>
+<pre><code>var books = [
+    {name:&apos;nodeJs&apos;,price:30,count:1},
+    {name:&apos;angularJs&apos;,price:20,count:2},
+    {name:&apos;vueJs&apos;,price:40,count:2}
+];
+var vm = new Vue({
+    el:&apos;#app&apos;,
+    data:{
+        books:books,
+        list:{name:&apos;&apos;,price:&apos;&apos;,count:&apos;&apos;
+        }
+    },
+    computed:{
+        total() {
+            var sum = 0;
+            this.books.forEach(function (a) {
+                sum+=a.price* a.count
+            });
+            return sum;
+        }
+    },
+    methods: {
+        add() {
+            this.books.push(this.list);
+            this.list = {name:&apos;&apos;,price:&apos;&apos;,count:&apos;&apos;
+            }
+        },
+        remove(book){
+            this.books.$remove(book);
+        }
+    }
+});
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/24/Vue方法篇1/" data-id="civw47k1h00008otaf6bhkooa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/28/Vue方法篇2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue方法篇2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/23/Vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/28/Vue方法篇2/">Vue方法篇2</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/24/Vue方法篇1/">Vue方法篇1</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/23/Vue/">Vue入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
